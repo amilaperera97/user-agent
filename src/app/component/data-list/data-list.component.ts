@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UserAgentInfo } from 'src/app/dto/data';
+import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
   selector: 'app-data-list',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DataListComponent implements OnInit {
 
-  constructor() { }
+  userAgentInfo: any;
+
+  constructor(private firebaseService: FirebaseService) { }
 
   ngOnInit(): void {
+    
+    this.firebaseService.fetch().subscribe(agentData=>{
+      this.userAgentInfo=JSON.stringify(agentData);
+      }
+    );
   }
 
 }
